@@ -1,0 +1,46 @@
+{% extends "inicio.html" %}
+{% load static %}
+{% block titulo %}
+<h1 class="mb-5">MIS LIBROS FAVORITOS</h1>
+{% endblock %}
+{% block libreria %}
+
+{% if lista %}
+<ul>
+    {% for Imagen in lista %}
+        <li>
+            <p>
+                <form method="post" enctype="multipart/form-data">
+                <img style="display: block;" height="100px" src="{{ imagen }}" alt="...">
+                Id:{{ Imagen.id }} |
+                Libro:{{ Imagen.nombre_libro }} |
+                subtitulo:{{ Imagen.subtitulo }} |
+                cuerpo:{{ Imagen.cuerpo |safe }} |
+                autor:{{ Imagen.autor }} |
+                Fecha Posteo:{{ Imagen.fecha_posteo }} |
+            </p>
+            <p>
+                <button type="submit"><a href="{% url 'LibroFavoritoBorra' Imagen.id %}"> Borrar</a></button>
+            </p>
+    
+    </form>
+        </li>
+        <br>
+    {% endfor%}
+
+{% else %}
+<p style="text-align:center">NO HAY LIBROS CARGADOS</p>
+
+
+</ul>
+{% endif %}
+
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'LibroFavoritoNuevo' %}"><h6 style="text-align:right;color:black">Cargue su libro favorito aqui</h6></a>
+    </li>
+
+</ul>
+
+
+{% endblock %}
+
